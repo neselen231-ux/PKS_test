@@ -55,7 +55,7 @@ engine = create_engine(
 st.title("Reception download")
 
 df = pd.read_sql("SELECT * FROM reception", con=engine)
-after_inv_df = pd.read_sql("SELECT * FROM kitting, con=engine)
+
 
 buffer = BytesIO()
 after_inv_buffer = BytesIO()

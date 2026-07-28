@@ -58,13 +58,11 @@ df = pd.read_sql("SELECT * FROM reception", con=engine)
 
 
 buffer = BytesIO()
-after_inv_buffer = BytesIO()
 
 with pd.ExcelWriter(buffer, engine="xlsxwriter") as writer:
     df.to_excel(writer, index=False)
 
-with pd.ExcelWriter(after_inv_buffer, engine="xlsxwriter") as writer:
-    after_inv_df.to_excel(writer, index=False)
+
 
 st.download_button(
     label="📥 Download kitting history",

@@ -26,7 +26,7 @@ engine = create_engine(
         "ssl": {"ca": "ca.pem"}
     }
 )
-st.title("Kitting input")
+st.title("Kitting download")
 import datetime as dt
 import streamlit as st
 import pandas as pd
@@ -52,7 +52,6 @@ engine = create_engine(
         "ssl": {"ca": "ca.pem"}
     }
 )
-st.title("Reception download")
 
 df = pd.read_sql("SELECT * FROM kitting", con=engine)
 

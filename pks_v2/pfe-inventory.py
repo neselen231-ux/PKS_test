@@ -147,76 +147,76 @@ if submit:
 
 
                 ############ data matrix #############
-                RS = chr(30)
-                GS = chr(29)
-                EOT = chr(4)
+                #RS = chr(30)
+                #GS = chr(29)
+                #EOT = chr(4)
 
-                data = "[)>" + RS+"06"+ GS + "12PGTL3"+ GS + f"V{vendor}"+ GS + f"Q{inv_qty}"+GS+f"P{reference.upper()}"+GS+ f"SI{inv_lot}" + RS + EOT
+                #data = "[)>" + RS+"06"+ GS + "12PGTL3"+ GS + f"V{vendor}"+ GS + f"Q{inv_qty}"+GS+f"P{reference.upper()}"+GS+ f"SI{inv_lot}" + RS + EOT
 
 
-                dm_barcode = treepoem.generate_barcode(barcode_type="datamatrix",data=data)
+                #dm_barcode = treepoem.generate_barcode(barcode_type="datamatrix",data=data)
 
-                dm_img = dm_barcode.convert("RGB")
-                dm_img = dm_img.resize((160, 100), Image.NEAREST)
+                #dm_img = dm_barcode.convert("RGB")
+                #dm_img = dm_img.resize((160, 100), Image.NEAREST)
                 ##########################################""
 
 
 
 
-                max_w = 430
-                total_h = 330
+                #max_w = 430
+                #total_h = 330
 
-                combined = Image.new("RGB", (max_w, total_h), "white")
+                #combined = Image.new("RGB", (max_w, total_h), "white")
 
-                text_sticker = ImageDraw.Draw(combined)
-                text_sticker.text(
-                    (55, 30),
-                    f"{dt.datetime.now().date()}  {usage}",
-                    fill="black",
-                    font=ffont
-                )
-                text_sticker.text(
-                    (35, 90),
-                    f"OPM lot : {inv_lot}",
-                    fill="black",
-                    font=ffont2
-                )
-                text_sticker.text(
-                    (35, ref_img.height+30),
-                    f"Reference : {reference}",
-                    fill="black",
-                    font=ffont2
-                )
-                text_sticker.text(
-                    (35, ref_img.height+60),
-                    f"Quantity : {inv_qty}",
-                    fill="black",
-                    font=ffont2
-                )
-
-
-
-
-                combined.paste(dm_img, (290, 200))
+                #text_sticker = ImageDraw.Draw(combined)
+                #text_sticker.text(
+                #    (55, 30),
+                #    f"{dt.datetime.now().date()}  {usage}",
+                #    fill="black",
+                #    font=ffont
+                #)
+                #text_sticker.text(
+                #    (35, 90),
+                #    f"OPM lot : {inv_lot}",
+                #    fill="black",
+                #    font=ffont2
+                #)
+                #text_sticker.text(
+                #    (35, ref_img.height+30),
+                #    f"Reference : {reference}",
+                #    fill="black",
+                #    font=ffont2
+                #)
+                #text_sticker.text(
+                #    (35, ref_img.height+60),
+                #    f"Quantity : {inv_qty}",
+                #    fill="black",
+                #    font=ffont2
+                #)
 
 
 
-                download_carton_buffer = BytesIO()
-                combined.save(download_carton_buffer, format="PNG")
-                download_carton_buffer.seek(0)
+
+                #combined.paste(dm_img, (290, 200))
+
+
+
+                #download_carton_buffer = BytesIO()
+                #combined.save(download_carton_buffer, format="PNG")
+                #download_carton_buffer.seek(0)
 
                 # 모바일 표시용 resize
-                display_img = combined.copy()
-                display_img.thumbnail((800, 800))
+                #display_img = combined.copy()
+                #display_img.thumbnail((800, 800))
 
-                st.image(display_img)
+                #st.image(display_img)
 
                 download_carton_buffer.seek(0)
-                st.session_state.reference = reference
-                st.session_state.qty = inv_qty
-                st.session_state.vendor = vendor
+                #st.session_state.reference = reference
+                #st.session_state.qty = inv_qty
+                #st.session_state.vendor = vendor
                 #st.session_state.project = project
-                st.session_state.op_lot = inv_lot
+                #st.session_state.op_lot = inv_lot
 
                 # -------------------------
                 # Multiple Barcode

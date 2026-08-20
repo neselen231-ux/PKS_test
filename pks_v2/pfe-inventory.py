@@ -164,7 +164,7 @@ if submit:
 
 
                 max_w = 600
-                total_h = 400
+                total_h = 350
 
                 combined = Image.new("RGB", (max_w, total_h), "white")
 
@@ -196,10 +196,9 @@ if submit:
 
 
 
-                #combined.paste(lot_img, (165, 28))
-                #combined.paste(ref_img, (165, ref_img.height+18))
+
                 combined.paste(dm_img, (290, 200))
-                #combined.paste(vendor_img, (165, vendor_img.height+140))
+
 
 
                 download_carton_buffer = BytesIO()

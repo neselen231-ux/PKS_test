@@ -157,14 +157,14 @@ if submit:
                 dm_barcode = treepoem.generate_barcode(barcode_type="datamatrix",data=data)
 
                 dm_img = dm_barcode.convert("RGB")
-                dm_img = dm_img.resize((200, 200), Image.NEAREST)
+                dm_img = dm_img.resize((180, 10), Image.NEAREST)
                 ##########################################""
 
 
 
 
-                max_w = 400
-                total_h = 300
+                max_w = 430
+                total_h = 330
 
                 combined = Image.new("RGB", (max_w, total_h), "white")
 

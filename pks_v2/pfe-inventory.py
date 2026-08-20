@@ -211,7 +211,7 @@ if submit:
 
                 #st.image(display_img)
 
-                download_carton_buffer.seek(0)
+                #download_carton_buffer.seek(0)
                 #st.session_state.reference = reference
                 #st.session_state.qty = inv_qty
                 #st.session_state.vendor = vendor

@@ -321,13 +321,3 @@ if submit:
 
 
 
-
-df = pd.read_sql("SELECT * FROM reception", con=engine)
-
-
-
-new_rows = df.iloc[-2:]
-
-
-with st.expander("last 10 receptions",expanded=False):
-    st.table(new_rows)

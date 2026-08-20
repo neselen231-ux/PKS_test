@@ -72,10 +72,10 @@ ffont2 = ImageFont.truetype("pks_v2/fonts/NanumGothic-Regular.ttf", 22)
 if submit:
     if inv_lot:
         if inv_qty:
-            
+
             inv_lot = inv_lot.strip()
             with engine.begin() as conn:
-                
+
                 # 1️⃣ reference 조회
                 result = conn.execute(
                     text("""
@@ -85,30 +85,30 @@ if submit:
                     """),
                     {"inv_lot": inv_lot}
                 )
-                
+
                 reference = result.scalar()
-                
+
                 # reference 없을 경우 방지
                 if reference is None:
                     st.error(f"OP lot '{inv_lot}' not found")
                     st.stop()
-                
+
                 reference = str(reference)
-                
+
                 # 2️⃣ vendor 찾기
                 vendor_match = vendor_list.loc[
                     vendor_list["Part number"] == reference, "Supplier"
                 ]
-                
+
                 vendor = vendor_match.iloc[0] if not vendor_match.empty else "VNUL"
-                
+
                 # 3️⃣ usage 찾기
                 usage_match = usage_list.loc[
                     usage_list["reference"] == reference[:7], "usage"
                 ]
-                
+
                 usage = ",".join(usage_match.dropna().astype(str).unique())
-                
+
                 # 4️⃣ inventory update
                 conn.execute(
                     text("""
@@ -128,51 +128,43 @@ if submit:
 
 
 
-                                    # -------------------------
-                    # Barcode
                     # -------------------------
-    
-                    
-    
-                image_bytes = BytesIO()
-                qty_lots = BytesIO()
-                vendor_bytes = BytesIO()
-                
-                    
-                qty_lots.seek(0)
-                qty_img = Image.open(qty_lots).convert("RGB")
-                image_bytes.seek(0)
-                lot_img = Image.open(image_bytes).convert("RGB")
-                vendor_bytes.seek(0)
-                vendor_img = Image.open(vendor_bytes).convert("RGB")
-
-                                
+                    # REFERENCE barcode generation
+                    # -------------------------
                 buf_ref = BytesIO()
+                Code128("P"+reference.upper(), writer=ImageWriter()).write(buf_ref, options)
                 buf_ref.seek(0)
                 ref_img = Image.open(buf_ref).convert("RGB")
-    
-    
-    
-                    
+
+
+
+
+                    # -------------------------
+                    # Barcode
+                    # -------------------------
+
+
+
+
                 ############ data matrix #############
                 RS = chr(30)
                 GS = chr(29)
                 EOT = chr(4)
 
                 data = "[)>" + RS+"06"+ GS + "12PGTL3"+ GS + f"V{vendor}"+ GS + f"Q{inv_qty}"+GS+f"P{reference.upper()}"+GS+ f"SI{inv_lot}" + RS + EOT
-                
+
 
                 dm_barcode = treepoem.generate_barcode(barcode_type="datamatrix",data=data)
-                
+
                 dm_img = dm_barcode.convert("RGB")
                 dm_img = dm_img.resize((200, 200), Image.NEAREST)
                 ##########################################""
 
-                
 
-                                
-                max_w = max(ref_img.width, lot_img.width, qty_img.width, vendor_img.width) + 250
-                total_h = ref_img.height + lot_img.height + qty_img.height + vendor_img.height
+
+
+                max_w = 600
+                total_h = 400
 
                 combined = Image.new("RGB", (max_w, total_h), "white")
 
@@ -217,7 +209,7 @@ if submit:
                 # 모바일 표시용 resize
                 display_img = combined.copy()
                 display_img.thumbnail((800, 800))
-                
+
                 st.image(display_img)
 
                 download_carton_buffer.seek(0)
@@ -231,7 +223,7 @@ if submit:
                 # Multiple Barcode
                 # -------------------------
 
-                
+
                 if sup_sn_check is True:
                     download_zip_buffer = BytesIO()
 
@@ -278,10 +270,10 @@ if submit:
                             img_bytes.seek(0)
 
                             zf.writestr(filename, img_bytes.read())
-                            
 
 
-                        
+
+
                     download_zip_buffer.seek(0)        
                     st.download_button(
                     label="📥 Download Barcode",
@@ -297,20 +289,13 @@ if submit:
                     mime="application/zip" if sup_sn_check else "image/png",
                     )
                 st.success("DB updated")                        
-    
+
         else: st.warning("Qty missing") 
     else: st.warning("Lot number missing")        
-            
 
 
-#if st.button("Print"):
-#    print_label(
-#    st.session_state.reference,
-#    st.session_state.qty,
-#    st.session_state.vendor,
-#    st.session_state.project,
-#    st.session_state.op_lot
-#    )
+
+
 
 
 

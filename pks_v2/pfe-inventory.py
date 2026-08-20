@@ -128,12 +128,6 @@ if submit:
             
                                 
         
-                    # -------------------------
-                    # REFERENCE barcode generation
-                    # -------------------------
-                buf_ref = BytesIO()
-                buf_ref.seek(0)
-                ref_img = Image.open(buf_ref).convert("RGB")
     
     
     

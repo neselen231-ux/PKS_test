@@ -125,7 +125,27 @@ if submit:
                         "oplot": inv_lot
                     }
                 )
-            
+
+
+
+                                    # -------------------------
+                    # Barcode
+                    # -------------------------
+    
+                    
+    
+                image_bytes = BytesIO()
+                qty_lots = BytesIO()
+                vendor_bytes = BytesIO()
+                
+                    
+                #qty_lots.seek(0)
+                #qty_img = Image.open(qty_lots).convert("RGB")
+                #image_bytes.seek(0)
+                #lot_img = Image.open(image_bytes).convert("RGB")
+                #vendor_bytes.seek(0)
+                #vendor_img = Image.open(vendor_bytes).convert("RGB")
+
                                 
                 buf_ref = BytesIO()
                 buf_ref.seek(0)

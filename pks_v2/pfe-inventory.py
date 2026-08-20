@@ -132,7 +132,6 @@ if submit:
                     # REFERENCE barcode generation
                     # -------------------------
                 buf_ref = BytesIO()
-                Code128("P"+reference.upper(), writer=ImageWriter()).write(buf_ref, options)
                 buf_ref.seek(0)
                 ref_img = Image.open(buf_ref).convert("RGB")
     
@@ -149,9 +148,6 @@ if submit:
                 qty_lots = BytesIO()
                 vendor_bytes = BytesIO()
                 
-                Code128("Q"+str(inv_qty), writer=ImageWriter()).write(qty_lots, options)
-                Code128("S"+str(inv_lot), writer=ImageWriter()).write(image_bytes, options)
-                Code128("V"+str(vendor), writer=ImageWriter()).write(vendor_bytes, options)
                     
                 qty_lots.seek(0)
                 qty_img = Image.open(qty_lots).convert("RGB")

@@ -163,8 +163,8 @@ if submit:
 
 
 
-                max_w = 600
-                total_h = 350
+                max_w = 400
+                total_h = 300
 
                 combined = Image.new("RGB", (max_w, total_h), "white")
 

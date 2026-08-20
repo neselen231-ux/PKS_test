@@ -157,7 +157,7 @@ if submit:
                 dm_barcode = treepoem.generate_barcode(barcode_type="datamatrix",data=data)
 
                 dm_img = dm_barcode.convert("RGB")
-                dm_img = dm_img.resize((180, 10), Image.NEAREST)
+                dm_img = dm_img.resize((160, 100), Image.NEAREST)
                 ##########################################""
 
 

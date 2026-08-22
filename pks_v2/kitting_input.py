@@ -50,16 +50,13 @@ with st.form("input_form"):
 
 if submit:
     with engine.begin() as conn:
-
-        # 4️⃣ inventory update
         conn.execute(
             text("""
                 INSERT INTO kit_todo
-                SET Project = :prj,
-                    Pack_number = :pnm,
-                    kit_name = :kitn,
-                    Product = :pro
-                    """),
+                    (Project, Pack_number, kit_name, Product)
+                VALUES
+                    (:prj, :pnm, :kitn, :pro)
+            """),
             {
                 "prj": Project,
                 "pnm": Pack_number,

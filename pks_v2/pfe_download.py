@@ -44,11 +44,36 @@ st.download_button(
     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 )
 
-#st.download_button(
-#    label="💎ᴠɪᴘ👍 Laurene's VIP Access 👍💎ᴠɪᴘ",
-#    data=after_inv_buffer.getvalue(),
-#    file_name=f"reception_history_afterinv_{dt.datetime.now():%Y%m%d_%H%M%S}.xlsx",
-#    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-#)
+############################ kitting archive ##################################
+
+df_kit = pd.read_sql("SELECT * FROM kitting", con=engine)
+buffer_kit = BytesIO()
+with pd.ExcelWriter(buffer_kit, engine="xlsxwriter") as writer:
+    df_kit.to_excel(writer, index=False)
+
+
+
+st.download_button(
+    label="📥 Download kitting archive",
+    data=buffer_kit.getvalue(),
+    file_name=f"kitting_archive_{dt.datetime.now():%Y%m%d_%H%M%S}.xlsx",
+    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+)
+
+############################ kit_todo archive ##################################
+
+df_kit2 = pd.read_sql("SELECT * FROM kit_todo", con=engine)
+buffer_kit2 = BytesIO()
+with pd.ExcelWriter(buffer_kit2, engine="xlsxwriter") as writer:
+    df_kit2.to_excel(writer, index=False)
+
+
+
+st.download_button(
+    label="📥 Download kit_todo archive",
+    data=buffer_kit2.getvalue(),
+    file_name=f"kit_todo_archive_{dt.datetime.now():%Y%m%d_%H%M%S}.xlsx",
+    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+)
 
 st.image("supply_yoda.jpg")

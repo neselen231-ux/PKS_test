@@ -23,7 +23,7 @@ engine = create_engine(
         "ssl": {"ca": "ca.pem"}
     }
 )
-st.title("Reception download")
+st.title("Kitting & Reception download")
 
 df = pd.read_sql("SELECT * FROM reception", con=engine)
 after_inv_df = pd.read_sql("SELECT * FROM reception  WHERE reception_date > '2026-05-17' ", con=engine)

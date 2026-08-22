@@ -76,4 +76,4 @@ st.download_button(
     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 )
 
-st.image("supply_yoda.jpg")
+st.image("logo-38023-scaled.jpg")

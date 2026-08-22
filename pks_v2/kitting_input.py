@@ -67,4 +67,6 @@ if submit:
         )
     st.success("DB updated")                        
 
-   
+df = pd.read_sql("SELECT * FROM kit_todo WHERE kit_input_time < NOW() - INTERVAL 6 DAY ", con=engine)
+with st.expander("kitting since 5 days ago",expanded=False):
+    st.table(df)

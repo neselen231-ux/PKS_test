@@ -53,15 +53,16 @@ if submit:
         conn.execute(
             text("""
                 INSERT INTO kit_todo
-                    (Project, Pack_number, kit_name, Product)
+                    (Project, Pack_number, kit_name, Product, kit_input_time)
                 VALUES
-                    (:prj, :pnm, :kitn, :pro)
+                    (:prj, :pnm, :kitn, :pro, :kit)
             """),
             {
                 "prj": Project,
                 "pnm": Pack_number,
                 "kitn": kit_name,
-                "pro": Product
+                "pro": Product,
+                "kit": dt.datetime.now().replace(microsecond=0)
             }
         )
     st.success("DB updated")                        

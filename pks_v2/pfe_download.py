@@ -76,4 +76,4 @@ st.download_button(
     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 )
 
-st.image("pks_test/pks_v2/logo-38023-scaled.jpg")
+st.image("pks_v2/logo-38023-scaled.jpg")

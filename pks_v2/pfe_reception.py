@@ -38,7 +38,7 @@ engine = create_engine(
     }
 )
 
-st.image("pks_test/pks_v2/logo-38023-scaled.jpg",width=280)
+st.image("pks_v2/logo-38023-scaled.jpg",width=280)
 # 2 input boxes
 
 with st.form("input_form"):

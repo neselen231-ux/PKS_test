@@ -54,7 +54,7 @@ if submit:
         # 4️⃣ inventory update
         conn.execute(
             text("""
-                UPDATE kit_todo
+                INSERT INTO kit_todo
                 SET Project = :prj,
                     Pack_number = :pnm,
                     kit_name = :kitn,
